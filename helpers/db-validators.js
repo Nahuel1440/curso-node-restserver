@@ -39,10 +39,25 @@ const existeProducto = async (id = "") =>{
   }
 }
 
+/**
+ * Validar colecciones permitidas
+ */
+const coleccionesPermitidas = (coleccion = "", colecciones = []) => {
+
+  const incluida = colecciones.includes( coleccion );
+  if( !incluida ){
+    throw new Error(`La coleccion ${ coleccion } no es permitida - ${ colecciones }`);
+  }
+  //Como las otros check fueron llamados de forma diferente es necesario retornar true
+  //Nota: Es una buena practica retornar true en los otros de arriba tambien
+  return true;
+}
+
 module.exports = {
   esRoleValido,
   emailExiste,
   existeUsuarioPorId,
   existeCategoria,
-  existeProducto
+  existeProducto,
+  coleccionesPermitidas
 };
